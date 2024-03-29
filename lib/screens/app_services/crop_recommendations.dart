@@ -4,7 +4,6 @@ import 'package:crop_recomm/utils/ml_models.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 
 class RecommService extends StatefulWidget {
   const RecommService({super.key});
