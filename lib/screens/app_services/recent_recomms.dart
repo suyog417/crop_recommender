@@ -9,6 +9,9 @@ class RecentRecommendations extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Recent"),
       ),
+      body: const Center(
+        child: Text("Nothing to show here"),
+      ),
     );
   }
 }

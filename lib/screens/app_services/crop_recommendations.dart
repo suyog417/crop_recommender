@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crop_recomm/screens/app_services/recent_recomms.dart';
+import 'package:crop_recomm/utils/ml_models.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,9 @@ class _RecommServiceState extends State<RecommService> {
               textAlign: TextAlign.end,
             ),
             // const Spacer(),
-            FilledElevatedButton(label: "label", onTap: () {}, enabled: true)
+            FilledElevatedButton(label: "Get Recommendations", onTap: () {
+              runModel();
+            }, enabled: true)
           ],
         ),
       ),
