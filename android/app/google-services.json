@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936079459804",
+    "project_id": "crop-recomm",
+    "storage_bucket": "crop-recomm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936079459804:android:f584508037de12297b7b19",
+        "android_client_info": {
+          "package_name": "com.example.crop_recomm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaZ9km0fW8Vad0QZ9tvQkMEEF-5ojNDzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
