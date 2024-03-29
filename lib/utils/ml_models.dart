@@ -14,3 +14,7 @@ runModel() async{
     print(output);
   }
 }
+
+Future<void> loadModel() async {
+
+}
