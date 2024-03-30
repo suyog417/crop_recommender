@@ -46,12 +46,12 @@ class _AccountHeaderState extends State<AccountHeader> {
       children: [
         Container(
           alignment: Alignment.topCenter,
+          height: MediaQuery.sizeOf(context).height * 0.2,
           // color: Colors.black,
           child: FractionallySizedBox(
             heightFactor: 0.8,
             child: Container(color: Colors.black,),
           ),
-          height: MediaQuery.sizeOf(context).height * 0.2,
         ),
         CircleAvatar(radius: MediaQuery.sizeOf(context).width * 0.1,)
       ],

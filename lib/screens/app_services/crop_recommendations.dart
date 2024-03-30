@@ -4,6 +4,7 @@ import 'package:crop_recomm/utils/ml_models.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class RecommService extends StatefulWidget {
   const RecommService({super.key});
@@ -13,6 +14,17 @@ class RecommService extends StatefulWidget {
 }
 
 class _RecommServiceState extends State<RecommService> {
+
+  TextEditingController nitrogen = TextEditingController();
+  TextEditingController potassium = TextEditingController();
+  TextEditingController phosphorus = TextEditingController();
+  TextEditingController rainfall = TextEditingController();
+  TextEditingController temperature = TextEditingController();
+  @override
+  void initState() {
+    readJson();
+    super.initState();
+  }
   bool isCelcius = true;
   double pH = 0.0;
   @override
@@ -31,27 +43,27 @@ class _RecommServiceState extends State<RecommService> {
         child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const CustomTextField(controller: null, label: Text("Potassium")),
+            CustomTextField(controller: potassium, label: const Text("Potassium"),inputType: TextInputType.number),
             const Divider(
               color: Colors.transparent,
             ),
-            const CustomTextField(controller: null, label: Text("Nitrogen")),
+             CustomTextField(controller: nitrogen, label: const Text("Nitrogen"),inputType: TextInputType.number),
             const Divider(
               color: Colors.transparent,
             ),
-            const CustomTextField(controller: null, label: Text("Phosphorus")),
+             CustomTextField(controller: phosphorus, label: const Text("Phosphorus"),inputType: TextInputType.number),
             const Divider(
               color: Colors.transparent,
             ),
-            const CustomTextField(controller: null, label: Text("Rainfall")),
+            CustomTextField(controller: rainfall, label: const Text("Rainfall"),inputType: TextInputType.number),
             const Divider(
               color: Colors.transparent,
             ),
             Row(
               children: [
-                const Expanded(
+                Expanded(
                     child: CustomTextField(
-                        controller: null, label: Text("Temperature"))),
+                        controller: temperature, label: const Text("Temperature"),inputType: TextInputType.number)),
                 VerticalDivider(
                   color: Colors.transparent,
                   width: MediaQuery.sizeOf(context).width * 0.02,
@@ -128,7 +140,24 @@ class _RecommServiceState extends State<RecommService> {
             ),
             // const Spacer(),
             FilledElevatedButton(label: "Get Recommendations", onTap: () {
-              runModel();
+              if(temperature.text.isNotEmpty){
+                int? result = rfc?.predict([double.parse(nitrogen.text.trim()),double.parse(phosphorus.text.trim()),
+                  double.parse(potassium.text.trim()),pH,double.parse(rainfall.text.trim()),
+                  double.parse(temperature.text.trim())]);
+                showDialog(context: context, builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Recommendations"),
+                    content: Text(cropNames[result!]),
+                  );
+                },);
+                Hive.box("Recents").put(DateTime.now().millisecondsSinceEpoch.toString(), {"date": DateTime.now().toString(), "inputs": [double.parse(nitrogen.text.trim()),double.parse(phosphorus.text.trim()),
+                  double.parse(potassium.text.trim()),pH,double.parse(rainfall.text.trim()),
+                  double.parse(temperature.text.trim())], "output": cropNames[result!]});
+              }
+              else{
+                print("No valid data provided");
+              }
+              // print(rfc?.classes);
             }, enabled: true)
           ],
         ),

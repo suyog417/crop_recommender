@@ -34,10 +34,14 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
       primaryColor: Colors.white,
       primaryColorDark: Colors.white,
+      sliderTheme: const SliderThemeData(
+        activeTrackColor: Colors.orange,
+        thumbColor: Colors.orange
+      ),
       textTheme: Theme.of(context).textTheme.apply(displayColor: Colors.white,bodyColor: Colors.white),
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black, foregroundColor: Colors.white),
-      listTileTheme: ListTileThemeData(
+      listTileTheme: const ListTileThemeData(
         textColor: Colors.white
       ),
       brightness: Brightness.dark,

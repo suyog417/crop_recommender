@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:crop_recomm/screens/home.dart';
 import 'package:crop_recomm/screens/on_boading/personal_info_input.dart';
-import 'package:crop_recomm/screens/on_boading/signInBloc.dart';
+import 'package:crop_recomm/screens/on_boading/sign_In_bloc.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
 import 'package:flutter/gestures.dart';

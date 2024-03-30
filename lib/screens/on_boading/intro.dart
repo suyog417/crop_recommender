@@ -41,7 +41,7 @@ class Introduction extends StatelessWidget {
                   )
               )
               ],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12
                   )
             ),

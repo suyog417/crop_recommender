@@ -10,6 +10,6 @@ class NewsService extends StatefulWidget {
 class _NewsServiceState extends State<NewsService> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

@@ -14,7 +14,7 @@ class PhoneVerification extends StatefulWidget {
 
 class _PhoneVerificationState extends State<PhoneVerification> {
   TextEditingController phone = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
   FocusNode focusNode = FocusNode();
   String countryCode = "+91";
   @override
@@ -64,7 +64,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                 enabled: true,
                 label: "Verify", onTap: () {
                   if(phone.text.length == 10){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OTPVerify(phoneNumber: "${countryCode+phone.text}"),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OTPVerify(phoneNumber: countryCode+phone.text),));
                   }
               },)
             ],

@@ -1,20 +1,51 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:sklite/ensemble/forest.dart';
 import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
 
-runModel() async{
-  final interpreter = await tfl.Interpreter.fromAsset("assets/crop_recomm.tflite");
+runModel() async {
+  final interpreter =
+      await tfl.Interpreter.fromAsset("assets/crop_recomm.tflite");
 
-  final input = [[112.89,2.956,600.32,31,19,8.7,0]];
+  final input = [
+    [112.89, 2.956, 600.32, 31, 19, 8.7, 0]
+  ];
 
-  var output = List.filled(1, 0).reshape([1,1]);
+  var output = List.filled(1, 0).reshape([1, 1]);
 
-  interpreter.run(input,output);
+  interpreter.run(input, output);
 
   if (kDebugMode) {
     print(output);
   }
 }
 
-Future<void> loadModel() async {
+const List<String> cropNames = [
+  'Sugarcane',
+  'Wheat',
+  'Cotton',
+  'Jowar',
+  'Maize',
+  'Rice',
+  'Groundnut',
+  'Tur',
+  'Ginger',
+  'Grapes',
+  'Urad',
+  'Moong',
+  'Gram',
+  'Turmeric',
+  'Soybean',
+  'Masoor'
+];
 
+RandomForestClassifier? rfc;
+
+Future<void> readJson() async {
+  final String response =
+      await rootBundle.loadString('assets/crop_recomm_json.json');
+  final data = await json.decode(response);
+  // print(data);
+  rfc = RandomForestClassifier.fromMap(data);
 }
