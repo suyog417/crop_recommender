@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crop_recomm/screens/on_boading/phone_num_verfication.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,7 @@ class Introduction extends StatelessWidget {
               maxLines: 2,
             ),
             FilledElevatedButton(label: "Start Your Journey", onTap: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PhoneVerification(),));
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => const PhoneVerification(),));
             },enabled: true,)
           ],
         ),

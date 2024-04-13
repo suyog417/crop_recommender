@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:crop_recomm/screens/app_services/add_land.dart';
 import 'package:crop_recomm/screens/app_services/ai_chat.dart';
 import 'package:crop_recomm/screens/app_services/services.dart';
 import 'package:crop_recomm/screens/profile.dart';
@@ -98,8 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const Divider(),
           FilledElevatedButton(label: "Add Land", onTap: () {
-            print(Hive.box("UserData").get("Name"));
-            runModel();
+            showModalBottomSheet<dynamic>(
+              context: context,
+              builder: (context) => const AddLand(),
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              isScrollControlled: true,
+            );
           }, enabled: true),
           const AutoSizeText(
             "Services",

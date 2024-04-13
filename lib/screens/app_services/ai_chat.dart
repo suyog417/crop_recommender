@@ -20,7 +20,7 @@ class _AIChatState extends State<AIChat> {
           leading: const FittedBox(fit: BoxFit.scaleDown,child: CircleAvatar(backgroundColor: Colors.black,)),
           title: const Text("Assistant"),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
+            IconButton.outlined(onPressed: () {}, icon: const Icon(Icons.call),style: IconButton.styleFrom(backgroundColor: Theme.of(context).canvasColor)),
           ],
         ),
         body: Padding(

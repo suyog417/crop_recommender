@@ -39,9 +39,7 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxlength,
       decoration: InputDecoration(
         label: label,
-          prefix: prefix,
-          border: OutlineInputBorder(borderRadius: AppTheme().borderRadius(context)),
-          contentPadding: AppTheme().contentPadding(context),
+          prefixIcon: prefix,
           suffixIcon: suffix,
         hintText: hintText,
       ),

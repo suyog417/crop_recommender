@@ -3,6 +3,7 @@ import 'package:crop_recomm/screens/home.dart';
 import 'package:crop_recomm/screens/on_boading/sign_In_bloc.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:crop_recomm/utils/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -43,15 +44,20 @@ class _PersonalInfoInputState extends State<PersonalInfoInput> {
             const Spacer(),
             BlocConsumer<SignInCubit, SignInState>(
               listener: (context, state) {
-                if(state is SuccessState){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Home(),));
-                }
+
               },
               builder: (context, state) {
                 return FilledElevatedButton(
                     label: "Proceed", onTap: () {
-                      Hive.box("UserData").put("Name", name.text.trim());
-                      context.read<SignInCubit>().checkName(name.text.trim());
+                      if(name.text.isNotEmpty){
+                        Hive.box("UserData").put("Name", name.text.trim()).whenComplete(() {
+                          Navigator.popUntil(context, (route) => route.isFirst);
+                          Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) => const Home(),));
+                        });
+                      }
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Enter valid name."),backgroundColor: Colors.redAccent,));
+                      }
                 }, enabled: true);
               },
             )

@@ -1,6 +1,7 @@
 import 'package:crop_recomm/firebase_options.dart';
 import 'package:crop_recomm/screens/home.dart';
 import 'package:crop_recomm/screens/on_boading/intro.dart';
+import 'package:crop_recomm/screens/on_boading/personal_info_input.dart';
 import 'package:crop_recomm/screens/on_boading/sign_In_bloc.dart';
 import 'package:crop_recomm/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,16 +43,25 @@ class _MyAppState extends State<MyApp> {
         theme: appTheme.lightTheme(context),
         darkTheme: appTheme.darkTheme(context),
         themeMode: ThemeMode.system,
-        home: ValueListenableBuilder(
-          valueListenable: Hive.box("UserData").listenable(),
-          builder: (context, box, child) {
-            if (box.get("isLoggedIn", defaultValue: false)) {
-              return const Home();
-            } else {
-              return const Introduction();
-            }
+        home: BlocBuilder<SignInCubit,SignInState>(
+          buildWhen: (previous, current) {
+            return previous is AuthInitialState;
           },
-        ),
+          builder: (context, state) {
+          if (state is AuthLoggedInState){
+            if(Hive.box("UserData").get("Name",defaultValue: "") == ""){
+              return const PersonalInfoInput();
+            } else{
+              return const Home();
+            }
+          }
+          else if (state is AuthLoggedOutState){
+            return const Introduction();
+          }
+          else {
+            return const Scaffold();
+          }
+        },)
       ),
     );
   }

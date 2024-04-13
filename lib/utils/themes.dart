@@ -44,6 +44,23 @@ class AppTheme {
       listTileTheme: const ListTileThemeData(
         textColor: Colors.white
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: contentPadding(context),
+        border: OutlineInputBorder(
+          borderRadius: borderRadius(context),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: borderRadius(context),
+            borderSide: const BorderSide(color: Colors.grey),
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        // style: IconButton.styleFrom(
+        //   backgroundColor: Colors.white,
+        //   foregroundColor: Colors.black
+        // )
+      ),
       brightness: Brightness.dark,
       canvasColor: Colors.black,
       scaffoldBackgroundColor: Colors.black,
